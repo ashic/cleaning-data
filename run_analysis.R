@@ -7,6 +7,9 @@
 #Note: measures like meanfreq() are not considered to be relevant, and are ignored.
 
 #As we use melt and dcast, we need the reshape2 library.
+if('reshape2' %in% installed.packages() == F){
+    install.packages('reshape2')
+}
 library(reshape2)
 
 
@@ -18,7 +21,14 @@ run_analysis <- function(){
     #This function downloads the data to a temp file, and returns the handle.
     downloadData <- function(){
         tmp <- tempfile()
-        download.file('https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip', destfile=tmp)
+        
+        #download file. Try default method first. If that fails (e.g. for https and linux), try wget.
+        tryCatch(
+            download.file('https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip', destfile=tmp)
+            , error = function(e){
+                download.file('https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip', destfile=tmp, method='wget')
+            }
+        )
         tmp
     }
     

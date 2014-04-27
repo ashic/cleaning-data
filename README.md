@@ -15,6 +15,7 @@ run\_analysis.R is the main script. It exposes a function called run\_analysis()
 - Load the script run\_analysis.R
 - Call the function run\_analysis()
 - The output is two files tidy.txt and tidy2.txt
+- The codebook can be found [here](https://github.com/ashic/cleaning-data/blob/master/CodeBook.md).
 
 ##Output
 The files are stored in csv format, and can be loaded into data frames with read.csv. They are output to the current working directory.

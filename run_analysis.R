@@ -20,16 +20,19 @@ run_analysis <- function(){
     
     #This function downloads the data to a temp file, and returns the handle.
     downloadData <- function(){
-        tmp <- tempfile()
+        fileName <- 'UCI HAR Dataset.zip'
         
-        #download file. Try default method first. If that fails (e.g. for https and linux), try wget.
-        tryCatch(
-            download.file('https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip', destfile=tmp)
-            , error = function(e){
-                download.file('https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip', destfile=tmp, method='wget')
-            }
-        )
-        tmp
+        if(!file.exists('UCI HAR Dataset.zip')){
+            #download file. Try default method first. If that fails (e.g. for https and linux), try wget.
+            tryCatch(
+                download.file('https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip', destfile=fileName)
+                , error = function(e){
+                    download.file('https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip', destfile=fileName, method='wget')
+                }
+            )
+        }
+        
+        fileName
     }
     
     #This function loads the relevant data from the zip file into a list of frames. 
@@ -124,7 +127,4 @@ run_analysis <- function(){
     #dcast the metlted data to get the average for each feature per subject per activity.
     tidy2 <- dcast(melted, subject + activity ~ variable, mean)
     write.csv(tidy2, "tidy2.txt", row.names=F)
-    
-    #work done...close connection to zip file
-    unlink(f)
 }

@@ -7,7 +7,7 @@
 
 The `run_analysis.R` script carries out the following:
 
-1. Download the source file into a temporary location.
+1. Download the source file into the current working directory if it is not already present.
 	- This is carried out by the downloadData() helper function.
 2. Load the data from inside the zip file:
     1. The training and test data for the measurements (X), the activities (Y) and subjects (S) are loaded from the train and test folders.
@@ -36,7 +36,6 @@ The `run_analysis.R` script carries out the following:
 10. The melted data is aggregated  by "mean" for each subject and identity.
 	- The aggregated data frame has 180 rows and 68 columns - the first two representing subject and activity, and the remaining ones holding the average or each mean / std measure got that particular subject-activity pair.
 11. The aggregated data frame is written out to "tidy2.txt" as the second output.
-12. The file connection is disposed with unlink.
 
 ## Variable Descriptions
 

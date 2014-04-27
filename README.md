@@ -13,7 +13,7 @@ run\_analysis.R is the main script. It exposes a function called run\_analysis()
 
 ##Running the script
 - Load the script run\_analysis.R
-- Call the function run\_analysis.R
+- Call the function run\_analysis()
 - The output is two files tidy.txt and tidy2.txt
 
 ##Output
